@@ -1,6 +1,7 @@
 from datetime import datetime, timedelta
 from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardMarkup
+from pyrogram.enums import ChatAction
 from config import youtube_next_fetch
 from helper.ytdlfunc import extractYt, create_buttons
 import wget
@@ -22,7 +23,7 @@ async def ytdl(client, message):
         pass
 
     url = message.text.strip()
-    await message.reply_chat_action("typing")
+    await message.reply_chat_action(ChatAction.TYPING)
     try:
         title, thumbnail_url, formats = extractYt(url)
         now = datetime.now()

@@ -1,13 +1,11 @@
-def humanbytes(num, suffix='B'):
-    if num is None:
-        num = 0
-    else:
-        num = int(num)
-
-    for unit in ['', 'K', 'M', 'G', 'T', 'P', 'E', 'Z']:
-        if abs(num) < 1024.0:
-            return "%3.1f%s%s" % (num, unit, suffix)
-        num /= 1024.0
-    return "%.1f%s%s" % (num, 'Yi', suffix)
-
-
+def humanbytes(size):
+    # يحول البايتات لوحدة أسهل للقراءة (KB, MB, GB)
+    if not size:
+        return ""
+    power = 2**10
+    n = 0
+    labels = {0: 'B', 1: 'KB', 2: 'MB', 3: 'GB', 4: 'TB'}
+    while size > power:
+        size /= power
+        n += 1
+    return f"{round(size, 2)} {labels[n]}"
